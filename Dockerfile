@@ -1,11 +1,11 @@
-ARG NGINX_VERSION=1.16.1
+ARG NGINX_VERSION=1.17.5
 ARG NGINX_RTMP_VERSION=1.2.1
 ARG FFMPEG_VERSION=4.2.1
 
 
 ##############################
 # Build the NGINX-build image.
-FROM alpine:3.8 as build-nginx
+FROM alpine:3.10.3 as build-nginx
 ARG NGINX_VERSION
 ARG NGINX_RTMP_VERSION
 
@@ -53,7 +53,7 @@ RUN cd /tmp/nginx-${NGINX_VERSION} && \
 
 ###############################
 # Build the FFmpeg-build image.
-FROM alpine:3.8 as build-ffmpeg
+FROM alpine:3.10.3 as build-ffmpeg
 ARG FFMPEG_VERSION
 ARG PREFIX=/usr/local
 ARG MAKEFLAGS="-j4"
@@ -122,7 +122,7 @@ RUN rm -rf /var/cache/* /tmp/*
 
 ##########################
 # Build the release image.
-FROM alpine:3.8
+FROM alpine:3.10.3
 LABEL MAINTAINER Alfred Gutierrez <alf.g.jr@gmail.com>
 
 RUN apk add --update \
